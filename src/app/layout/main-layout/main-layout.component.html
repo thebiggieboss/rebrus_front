@@ -1,53 +1,99 @@
 <nz-layout class="app-layout">
   <nz-sider
+    nzTheme="light"
     class="menu-sidebar"
     nzCollapsible
     nzWidth="256px"
     nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Ant Design Of Angular</h1>
-      </a>
+    <div>
+      <div class="sidebar-logo">
+        <a routerLink="/home">
+          <div class="sidebar-logo_logo">
+            <img src="./assets/icons/mini-logo.svg" alt="logo" />
+            <h3 class="sidebar-logo_logo-text">Rebrus</h3>
+          </div>
+        </a>
+      </div>
+      <ul
+        nz-menu
+        nzTheme="light"
+        nzMode="inline"
+        [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item nzMatchRouter>
+          <span nz-icon nzType="home"></span>
+          <span>
+            <a routerLink="/home">Главная</a>
+          </span>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <span nz-icon nzType="usergroup-delete" nzTheme="outline"></span>
+          <span>
+            <a routerLink="/patients">Пациенты</a>
+          </span>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <span nz-icon nzType="calendar" nzTheme="outline"></span>
+          <span>
+            <a routerLink="/schedule">Расписание</a>
+          </span>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <span nz-icon nzType="file" nzTheme="outline"></span>
+          <span>
+            <a routerLink="/files">Файлы</a>
+          </span>
+        </li>
+      </ul>
     </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <div class="slider-menu-custom">
+      <ul
+        nz-menu
+        nzTheme="light"
+        nzMode="inline"
+        [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item nzMatchRouter>
+          <span nz-icon nzType="setting" nzTheme="outline"></span>
+          <span>
+            <a routerLink="/settings">Настройки</a>
+          </span>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <span nz-icon nzType="login" nzTheme="outline"></span>
+          <span>
+            <a routerLink="/logout">Выйти</a>
+          </span>
+        </li>
+        <li nz-menu-item nzMatchRouter class="slider-menu-user">
+          <img
+            src="./assets/images/ava.png"
+            alt=""
+            class="slider-menu-user_img" />
+          <div class="slider-menu-user_text">
+            <p>Улан Кожабеков</p>
+            <p style="color: #71839b" [innerHTML]="'ulankdt@gmail.com'"></p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </nz-sider>
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-        </span>
+        <span></span>
+        <!--        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">-->
+        <!--          <i-->
+        <!--            class="trigger"-->
+        <!--            nz-icon-->
+        <!--            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>-->
+        <!--        </span>-->
+        <ng-template [ngIf]="!!date && !!date.length" [ngIfElse]="isLoad">
+          <p class="app-header_time">Текущее время: {{ date }}</p>
+        </ng-template>
+        <ng-template #isLoad>
+          <nz-spin nzSimple></nz-spin>
+        </ng-template>
       </div>
     </nz-header>
     <nz-content>

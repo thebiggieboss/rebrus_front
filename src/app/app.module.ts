@@ -10,11 +10,12 @@ import ru from '@angular/common/locales/ru';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GuestComponent } from './layout/guest/guest.component';
 
 registerLocaleData(ru);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, GuestComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

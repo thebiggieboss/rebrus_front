@@ -1,0 +1,51 @@
+<div class="login-component">
+  <img src="./assets/icons/Logo.svg" alt="" class="login-component_logo" />
+  <div class="login-component_form" [formGroup]="form">
+    <div class="login-component_fields">
+      <div class="login-component_field">
+        <label for="email">Электронная почта</label>
+        <input
+          id="email"
+          formControlName="email"
+          nz-input
+          type="email"
+          [nzStatus]="isFieldInvalid('email')" />
+      </div>
+      <div class="login-component_field">
+        <label for="password">Пароль</label>
+        <nz-input-group
+          [nzSuffix]="suffixTemplate"
+          [nzStatus]="isFieldInvalid('password')">
+          <input
+            id="password"
+            formControlName="password"
+            nz-input
+            [type]="passwordVisible ? 'text' : 'password'" />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span
+            nz-icon
+            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"></span>
+        </ng-template>
+      </div>
+      <div class="login-component_actions">
+        <label nz-checkbox>Запомнить</label>
+        <a href="/login">Забыли пароль?</a>
+      </div>
+    </div>
+    <div class="login-component_foot">
+      <button
+        (click)="submit()"
+        class="login-component_foot-btn"
+        nz-button
+        nzType="primary"
+        nzSize="large">
+        Войти в систему
+      </button>
+      <p class="login-component_foot-link">
+        Нет аккаунта? <a href="/sign-up">Зарегистрироваться</a>
+      </p>
+    </div>
+  </div>
+</div>

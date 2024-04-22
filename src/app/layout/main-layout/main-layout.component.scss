@@ -34,14 +34,29 @@
   padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #001529;
+  //background: #001529;
   transition: all .3s;
+
+  &_logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    &-text {
+      font-size: 24px;
+      font-weight: 600;
+      color: #324054;
+    }
+  }
 }
 
 .sidebar-logo img {
   display: inline-block;
   height: 32px;
   width: 32px;
+  //width: 100%;
+  //max-width: 260px;
+  //width: 32px;
   vertical-align: middle;
 }
 
@@ -64,9 +79,16 @@ nz-header {
 .app-header {
   position: relative;
   height: 64px;
-  padding: 0;
-  background: #fff;
+  padding: 0 16px;
+  background: #f0f2f5;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  display: flex;
+  justify-content: space-between;
+  &_time {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+  }
 }
 
 nz-content {
@@ -74,7 +96,33 @@ nz-content {
 }
 
 .inner-content {
-  padding: 24px;
+  //padding: 24px;
   background: #fff;
   height: 100%;
+}
+
+.slider-menu-user {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 64px;
+  &_img {
+    height: 40px;
+    width: 40px;
+  }
+  &_text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    p {
+      line-height: 100%;
+    }
+  }
+}
+::ng-deep {
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
