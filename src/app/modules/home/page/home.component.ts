@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ItemData } from '../../../core/interfaces/home.interfaces';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { listOfColumn } from '../../../core/helpers';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   listOfData: ItemData[] = [];
+  listOfColumn = listOfColumn;
   mainCheckBox: boolean = false;
   isSelectedAllInvoices$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
@@ -28,11 +30,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
     this.listOfData = new Array(10).fill(0).map((_, index) => ({
       id: index,
-      surname: `Edward King ${index}`,
-      name: `Edward King ${index}`,
-      iin: `Edward King ${index}`,
-      gender: `Edward King ${index}`,
-      creationDate: `Edward King ${index}`,
+      surname: `Сергеев ${index}`,
+      name: `Сергей ${index}`,
+      iin: `91020150030${index}`,
+      gender: index % 2 === 0 ? 'Мужской' : 'Женский',
+      creationDate: `20.12.202${index}`,
       isSelected: false,
     }));
   }

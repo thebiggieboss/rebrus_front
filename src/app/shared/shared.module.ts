@@ -14,9 +14,15 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { PushComponent } from './components/push/push.component';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { CreatePatientModalComponent } from './components/create-patient-modal/create-patient-modal.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
-  declarations: [MainLayoutComponent, PushComponent],
+  declarations: [
+    MainLayoutComponent,
+    PushComponent,
+    CreatePatientModalComponent,
+  ],
   imports: [
     CommonModule,
     NzLayoutModule,
@@ -32,6 +38,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzMessageModule,
     NzSpinModule,
     NzTableModule,
+    NzModalModule,
   ],
   providers: [],
   exports: [

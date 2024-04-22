@@ -1,20 +1,73 @@
 <app-main-layout>
   <div class="home-component">
-    <div class="home-component_head"></div>
+    <div class="home-component_head">
+      <div class="home-component_head-text">
+        <h3 class="home-component_head-text-title">Список пациентов</h3>
+        <p class="home-component_head-text-des">Таблица с пациентами</p>
+      </div>
+      <div class="home-component_head-actions">
+        <div class="home-component_head-action">
+          <span
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            style="font-size: 16px"></span>
+          <p class="home-component_head-action-text">Удалить</p>
+        </div>
+        <div class="home-component_head-action">
+          <span
+            nz-icon
+            nzType="filter"
+            nzTheme="outline"
+            style="font-size: 16px"></span>
+          <p class="home-component_head-action-text">Фильтр</p>
+        </div>
+        <div class="home-component_head-btns">
+          <button
+            nz-button
+            nzType="default"
+            nzSize="default"
+            style="border-radius: 8px">
+            <span
+              nz-icon
+              nzType="cloud-download"
+              nzTheme="outline"
+              style="font-size: 16px"></span>
+            Экспорт
+          </button>
+          <button
+            nz-button
+            nzType="primary"
+            nzSize="default"
+            style="border-radius: 8px">
+            <span
+              nz-icon
+              nzType="plus"
+              nzTheme="outline"
+              style="font-size: 16px"></span>
+            Добавить пациента
+          </button>
+        </div>
+      </div>
+    </div>
     <nz-table #rowSelectionTable [nzData]="listOfData">
       <thead>
         <tr>
           <th (click)="selectAllBlock()">
             <input
+              class="custom-checkbox"
               [(ngModel)]="mainCheckBox"
               type="checkbox"
               (change)="selectAll()" />
           </th>
-          <th nzColumnKey="surname" [nzSortFn]="true">Фамилия</th>
-          <th>Имя</th>
-          <th>ИИН</th>
-          <th nzColumnKey="gender" [nzFilterFn]="true">Пол</th>
-          <th>Дата создания</th>
+          <th
+            *ngFor="let column of listOfColumn"
+            [(nzSortOrder)]="column.sortOrder"
+            [nzSortFn]="column.sortFn"
+            [nzFilters]="column.listOfFilter"
+            [nzFilterFn]="column.filterFn">
+            {{ column.title }}
+          </th>
           <th></th>
         </tr>
       </thead>
@@ -22,6 +75,7 @@
         <tr *ngFor="let data of rowSelectionTable.data">
           <td (click)="singleSelectBlock(data)">
             <input
+              class="custom-checkbox"
               [(ngModel)]="data.isSelected"
               type="checkbox"
               (change)="singleSelect()" />
