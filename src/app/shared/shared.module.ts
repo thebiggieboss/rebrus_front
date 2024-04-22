@@ -55,6 +55,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzMessageModule,
     PushComponent,
     NzTableModule,
+    CreatePatientModalComponent,
   ],
 })
 export class SharedModule {}

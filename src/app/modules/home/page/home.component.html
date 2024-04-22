@@ -39,7 +39,8 @@
             nz-button
             nzType="primary"
             nzSize="default"
-            style="border-radius: 8px">
+            style="border-radius: 8px"
+            (click)="openModal()">
             <span
               nz-icon
               nzType="plus"
@@ -92,4 +93,6 @@
       </tbody>
     </nz-table>
   </div>
+  <app-create-patient-modal
+    [isVisible]="isCreateModal"></app-create-patient-modal>
 </app-main-layout>

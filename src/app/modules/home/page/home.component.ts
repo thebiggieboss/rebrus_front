@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isSelectedAllInvoices$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   s: Subscription[] = [];
+  isCreateModal: boolean = false;
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -60,5 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isSelectedAllInvoices$.next(this.mainCheckBox);
     this.mainCheckBox = this.listOfData.every(item => item.isSelected === true);
     this.cdr.detectChanges();
+  }
+  openModal() {
+    this.isCreateModal = !this.isCreateModal;
   }
 }
