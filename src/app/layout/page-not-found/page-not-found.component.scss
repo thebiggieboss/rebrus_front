@@ -1,0 +1,18 @@
+.not-found {
+  &_img {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    max-width: 1740px;
+    max-height: 980px;
+    margin: 0 auto;
+    cursor: pointer;
+    @media screen and (min-width: 1740px) {
+      max-width: 100%;
+    }
+    @media screen and (min-height: 1740px) {
+      max-height: 100%;
+    }
+  }
+}

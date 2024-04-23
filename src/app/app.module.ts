@@ -11,11 +11,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GuestComponent } from './layout/guest/guest.component';
+import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
 registerLocaleData(ru);
 
 @NgModule({
-  declarations: [AppComponent, GuestComponent],
+  declarations: [AppComponent, GuestComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

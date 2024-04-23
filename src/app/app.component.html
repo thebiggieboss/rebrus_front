@@ -1,1 +1,6 @@
-<router-outlet id="router"></router-outlet>
+<ng-template [ngIf]="isDesktopVersion" [ngIfElse]="isNot">
+  <router-outlet id="router"></router-outlet>
+</ng-template>
+<ng-template #isNot>
+  <img src="./assets/images/no.webp" alt="no" class="app-no" />
+</ng-template>
