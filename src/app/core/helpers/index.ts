@@ -1,6 +1,7 @@
 import { PushComponent } from '../../shared/components/push/push.component';
 import { NzMessageDataOptions } from 'ng-zorro-antd/message';
 import { ItemData } from '../interfaces/home.interfaces';
+import { FormGroup } from '@angular/forms';
 
 export function showMessage(
   type: string,
@@ -46,3 +47,27 @@ export const listOfColumn: any = [
     filterFn: null,
   },
 ];
+
+export function isFieldInvalid(field: string, form: FormGroup) {
+  const formField = form.get(field);
+  const valid =
+    (!formField.valid && formField.touched && !formField.pristine) ||
+    (!formField.valid && formField.dirty && !formField.pristine);
+  return valid ? 'error' : '';
+}
+export function warnEmptyField(form: FormGroup) {
+  const allFieldsControls = Object.keys(form.controls);
+  let emptyField: string;
+  allFieldsControls.forEach(f => {
+    if (!form.get(f).value && form.get(f).status === 'INVALID') {
+      if (!emptyField) {
+        emptyField = f;
+      }
+      form.get(f).markAsTouched();
+      form.get(f).markAsDirty();
+    }
+  });
+  if (emptyField) {
+    document.getElementById(emptyField)?.focus();
+  }
+}

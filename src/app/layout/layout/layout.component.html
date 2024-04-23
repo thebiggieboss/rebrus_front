@@ -1,0 +1,100 @@
+<nz-layout class="layout">
+  <nz-sider nzTheme="light" [nzWidth]="'288px'">
+    <div nz-row nzJustify="space-between" style="height: 100%">
+      <div nz-col nzSpan="24">
+        <div class="logo">
+          <a routerLink="/home">
+            <div nz-row nzJustify="start" nzAlign="middle" nzGutter="6">
+              <img
+                nz-col
+                nz-image
+                nzSrc="./assets/icons/mini-logo.svg"
+                width="32px"
+                height="32px"
+                alt="logo" />
+              <h3 class="logo-text" nz-col nzSpan="auto">Rebrus</h3>
+            </div>
+          </a>
+        </div>
+        <ul nz-menu nzTheme="light" nzMode="inline">
+          <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="home"></span>
+            <span>
+              <a routerLink="/home">Главная</a>
+            </span>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="usergroup-delete" nzTheme="outline"></span>
+            <span>
+              <a routerLink="/patients">Пациенты</a>
+            </span>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="calendar" nzTheme="outline"></span>
+            <span>
+              <a routerLink="/schedule">Расписание</a>
+            </span>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="file" nzTheme="outline"></span>
+            <span>
+              <a routerLink="/files">Файлы</a>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div nz-col nzSpan="24">
+        <ul nz-menu nzTheme="light" nzMode="inline" class="custom-menu">
+          <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="setting" nzTheme="outline"></span>
+            <span>
+              <a>Настройки</a>
+            </span>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="login" nzTheme="outline"></span>
+            <span>
+              <a>Выйти</a>
+            </span>
+          </li>
+          <li nz-menu-item nzMatchRouter nz-row routerLink="/profile">
+            <nz-avatar
+              nz-col
+              nzSpan="12"
+              nzIcon="user"
+              nzSrc="./assets/images/ava.png"
+              [nzSize]="40"></nz-avatar>
+            <div nz-col nzSpan="12" style="padding-left: 12px">
+              <div style="display: flex; flex-direction: column; gap: 4px">
+                <p style="line-height: 100%">Улан Кожабеков</p>
+                <p
+                  style="color: #71839b; line-height: 100%"
+                  [innerHTML]="'ulankdt@gmail.com'"></p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nz-sider>
+  <nz-layout class="right-layout">
+    <nz-header>
+      <div class="app-header" nz-row nzJustify="end">
+        <div nz-col nzSpan="12">
+          <ng-template [ngIf]="!!date && !!date.length" [ngIfElse]="isLoad">
+            <p class="app-header-time">Текущее время: {{ date }}</p>
+          </ng-template>
+          <ng-template #isLoad>
+            <nz-spin
+              nzSimple
+              style="padding-right: 32px; text-align: end"></nz-spin>
+          </ng-template>
+        </div>
+      </div>
+    </nz-header>
+    <div class="inner-content">
+      <ng-content></ng-content>
+    </div>
+    <nz-footer>muzbalak ©2024 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

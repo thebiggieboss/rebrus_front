@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainLayoutComponent } from '../layout/main-layout/main-layout.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { RouterModule } from '@angular/router';
@@ -16,13 +15,18 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { CreatePatientModalComponent } from './components/create-patient-modal/create-patient-modal.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { LayoutComponent } from '../layout/layout/layout.component';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 @NgModule({
-  declarations: [
-    MainLayoutComponent,
-    PushComponent,
-    CreatePatientModalComponent,
-  ],
+  declarations: [PushComponent, CreatePatientModalComponent, LayoutComponent],
   imports: [
     CommonModule,
     NzLayoutModule,
@@ -39,10 +43,17 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzSpinModule,
     NzTableModule,
     NzModalModule,
+    NzGridModule,
+    NzSelectModule,
+    NzDatePickerModule,
+    NzSwitchModule,
+    NzRadioModule,
+    NzSliderModule,
+    NzImageModule,
+    NzAvatarModule,
   ],
   providers: [],
   exports: [
-    MainLayoutComponent,
     NzLayoutModule,
     NzMenuModule,
     IconsProviderModule,
@@ -56,6 +67,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     PushComponent,
     NzTableModule,
     CreatePatientModalComponent,
+    LayoutComponent,
   ],
 })
 export class SharedModule {}

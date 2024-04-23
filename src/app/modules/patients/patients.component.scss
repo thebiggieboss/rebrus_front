@@ -1,0 +1,98 @@
+.patients-component {
+  border-radius: 8px;
+  background: #FFFFFF;
+  &_table {
+    height: 100%;
+  }
+  &_head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 24px 20px;
+    align-items: center;
+    &-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      &-title {
+        color: #101828;
+        font-weight: 500;
+        font-size: 20px;
+      }
+      &-des {
+        color: #667085;
+        font-size: 14px;
+      }
+    }
+    &-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    &-action {
+      width: 100%;
+      max-width: 118px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      &-text {
+        font-size: 14px;
+        font-weight: 500;
+        color: #344054;
+      }
+    }
+    &-btns {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+  }
+  tabel {
+    border-radius: 8px;
+  }
+  thead {
+    tr {
+      th {
+        background: #FCFCFD;
+      }
+    }
+  }
+  ::ng-deep {
+    .ant-table-pagination.ant-pagination {
+      padding: 0 16px;
+    }
+    .ant-table-cell {
+      color: #667085 !important;
+    }
+  }
+  //input[type='checkbox'] {
+  //  -moz-appearance: none;
+  //  -webkit-appearance: none;
+  //  appearance: none;
+  //  vertical-align: middle;
+  //  outline: none;
+  //  font-size: inherit;
+  //  cursor: pointer;
+  //  display: flex;
+  //  width: 18px;
+  //  height: 18px;
+  //  border-radius: 4px;
+  //  border: 1px solid #D0D5DD;
+  //  margin: 0 auto;
+  //}
+  //input[type='checkbox']:checked {
+  //  background: #0080FF;
+  //  border: 0;
+  //  position: relative;
+  //  &:after {
+  //    content: "";
+  //    background: transparent url('./assets/icons/check.svg') no-repeat;
+  //    position: absolute;
+  //    font-size: 90%;
+  //    left: 0.0625em;
+  //    top: -0.25em;
+  //  }
+  //}
+}

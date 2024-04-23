@@ -1,0 +1,68 @@
+.create-modal {
+  &_title {
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+  }
+  &_label {
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+  }
+  &_input {
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    color: #667085;
+    font-size: 14px;
+    height: 44px;
+    font-weight: 400;
+  }
+  &_select {
+    margin-top: 12px;
+    width: 100%;
+    outline: none;
+  }
+  &_date-picker {
+    margin-top: 12px;
+    width: 100%;
+    border-radius: 8px;
+    //border: 1px solid #D0D5DD;
+    color: #667085;
+    font-size: 14px;
+    height: 44px;
+    font-weight: 400;
+  }
+  &_switcher {
+    background-color: #0080FF;
+    padding: 14px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-title {
+      font-size: 14px;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+    &-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+::ng-deep {
+  .ant-modal-body {
+    padding: 42px 64px !important;
+  }
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    height: 44px;
+    align-items: center;
+  }
+  .ant-switch-checked {
+    background: #FF6347;
+  }
+}

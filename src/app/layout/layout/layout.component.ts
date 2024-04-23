@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-main-layout',
-  templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss'],
+  selector: 'app-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.css'],
 })
-export class MainLayoutComponent implements OnInit {
-  isCollapsed = false;
+export class LayoutComponent implements OnInit {
   public date: string;
-
   constructor() {}
-
   ngOnInit(): void {
     setInterval(() => {
       const today = new Date();

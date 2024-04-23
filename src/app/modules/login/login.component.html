@@ -9,13 +9,13 @@
           formControlName="email"
           nz-input
           type="email"
-          [nzStatus]="isFieldInvalid('email')" />
+          [nzStatus]="isFieldWrapperInvalid('email')" />
       </div>
       <div class="login-component_field">
         <label for="password">Пароль</label>
         <nz-input-group
           [nzSuffix]="suffixTemplate"
-          [nzStatus]="isFieldInvalid('password')">
+          [nzStatus]="isFieldWrapperInvalid('password')">
           <input
             id="password"
             formControlName="password"

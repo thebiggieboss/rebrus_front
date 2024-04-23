@@ -1,7 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ItemData } from '../../../core/interfaces/home.interfaces';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { listOfColumn } from '../../../core/helpers';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-home',
@@ -9,60 +7,51 @@ import { listOfColumn } from '../../../core/helpers';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  listOfData: ItemData[] = [];
-  listOfColumn = listOfColumn;
-  mainCheckBox: boolean = false;
-  isSelectedAllInvoices$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
-  s: Subscription[] = [];
-  isCreateModal: boolean = false;
-  constructor(private cdr: ChangeDetectorRef) {}
-
+  public time: string = 'month';
+  public chart: any;
+  public faqLists: string[] = [
+    'Память',
+    'Внимание',
+    'Ориентация',
+    'Обозначение',
+    'Визуально-пространственные',
+  ];
+  constructor() {}
   ngOnInit(): void {
-    this.s.push(
-      this.isSelectedAllInvoices$.subscribe({
-        next: value => {
-          if (this.mainCheckBox !== value) {
-            this.mainCheckBox = value;
-            this.cdr.detectChanges();
-          }
-        },
-      })
-    );
-    this.listOfData = new Array(10).fill(0).map((_, index) => ({
-      id: index,
-      surname: `Сергеев ${index}`,
-      name: `Сергей ${index}`,
-      iin: `91020150030${index}`,
-      gender: index % 2 === 0 ? 'Мужской' : 'Женский',
-      creationDate: `20.12.202${index}`,
-      isSelected: false,
-    }));
+    this.createPlot();
   }
-  ngOnDestroy(): void {
-    this.s.forEach(s => s.unsubscribe());
-  }
-  selectAllBlock() {
-    this.mainCheckBox = !this.mainCheckBox;
-    this.isSelectedAllInvoices$.next(this.mainCheckBox);
-    this.selectAll();
-  }
-  selectAll() {
-    if (!!this.listOfData.length) {
-      this.listOfData.map(item => (item.isSelected = this.mainCheckBox));
-    }
-    this.cdr.detectChanges();
-  }
-  singleSelectBlock(data: ItemData) {
-    data.isSelected = !data.isSelected;
-    this.singleSelect();
-  }
-  singleSelect() {
-    this.isSelectedAllInvoices$.next(this.mainCheckBox);
-    this.mainCheckBox = this.listOfData.every(item => item.isSelected === true);
-    this.cdr.detectChanges();
-  }
-  openModal() {
-    this.isCreateModal = !this.isCreateModal;
+  ngOnDestroy(): void {}
+  createPlot() {
+    this.chart = new Chart('canvas', {
+      type: 'line',
+      data: {
+        labels: [
+          'Янв',
+          'Фев',
+          'Март',
+          'Апр',
+          'Май',
+          'Июнь',
+          'Июль',
+          'Авг',
+          'Сен',
+          'Окт',
+          'Ноя',
+          'Дек',
+        ],
+        datasets: [
+          {
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40, 40, 12, 70, 71, 90],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        aspectRatio: 2.5,
+      },
+    });
   }
 }

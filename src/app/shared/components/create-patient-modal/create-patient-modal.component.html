@@ -1,7 +1,182 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal">
-  <ng-container *nzModalContent>
-    <p>Content one</p>
-    <p>Content two</p>
-    <p>Content three</p>
-  </ng-container>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzWidth]="'730px'"
+  [nzClassName]="'create-modal'">
+  <ng-template #modalTitle>
+    <h3 class="create-modal_title">Создание медкарты пациента</h3>
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div
+      class="create-modal_body"
+      nz-row
+      [nzGutter]="[100, 26]"
+      [formGroup]="form">
+      <div nz-col nzSpan="12">
+        <label for="name" class="create-modal_label"> Имя </label>
+        <input
+          id="name"
+          formControlName="name"
+          nz-input
+          placeholder="Заполните имя пациента"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('name')" />
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="iin" class="create-modal_label"> ИИН </label>
+        <input
+          id="iin"
+          formControlName="iin"
+          nz-input
+          placeholder="Заполните ИИН пациента"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('iin')" />
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="surname" class="create-modal_label"> Фамилия </label>
+        <input
+          id="surname"
+          formControlName="surname"
+          nz-input
+          placeholder="Заполните фамилию пациента"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('surname')" />
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="phone" class="create-modal_label"> Номер телефона </label>
+        <input
+          id="phone"
+          formControlName="phone"
+          nz-input
+          placeholder="Заполните номер телефона"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('phone')" />
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="patronymic" class="create-modal_label"> Отчество </label>
+        <input
+          id="patronymic"
+          formControlName="patronymic"
+          nz-input
+          placeholder="Заполните отчество пациента"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('patronymic')" />
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="responsible" class="create-modal_label">
+          Ответственный
+        </label>
+        <input
+          id="responsible"
+          formControlName="responsible"
+          nz-input
+          placeholder="Введите ответственного"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('responsible')" />
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="gender" class="create-modal_label"> Пол </label>
+        <div>
+          <nz-radio-group id="gender" formControlName="gender">
+            <div nz-row style="margin-top: 12px">
+              <div nz-col nzSpan="12">
+                <label nz-radio nzValue="male">Мужчина</label>
+              </div>
+              <div nz-col nzSpan="12">
+                <label nz-radio nzValue="female">Женщина</label>
+              </div>
+            </div>
+          </nz-radio-group>
+        </div>
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="region" class="create-modal_label"> Регион </label>
+        <div>
+          <nz-select
+            id="region"
+            formControlName="region"
+            class="create-modal_select"
+            nzAllowClear
+            nzPlaceHolder="Выберите регион"
+            [nzStatus]="isFieldWrapperInvalid('region')">
+            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+            <nz-option
+              nzValue="disabled"
+              nzLabel="Disabled"
+              nzDisabled></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="dateOfBirth" class="create-modal_label">
+          Дата рождения
+        </label>
+        <div>
+          <nz-date-picker
+            id="dateOfBirth"
+            formControlName="dateOfBirth"
+            [nzStatus]="isFieldWrapperInvalid('dateOfBirth')"
+            class="create-modal_date-picker"
+            [nzPlaceHolder]="'Выберите дату рождения'"></nz-date-picker>
+        </div>
+      </div>
+      <div nz-col nzSpan="12">
+        <label for="address" class="create-modal_label"> Адрес </label>
+        <input
+          id="address"
+          formControlName="address"
+          nz-input
+          placeholder="Заполните адрес пациента"
+          type="text"
+          class="create-modal_input"
+          [nzStatus]="isFieldWrapperInvalid('address')" />
+      </div>
+      <div nz-col nzSpan="24">
+        <div class="create-modal_switcher">
+          <p class="create-modal_switcher-title">Пациент ранее сдавал тест?</p>
+          <div class="create-modal_switcher-box">
+            <p class="create-modal_switcher-title">Нет</p>
+            <nz-switch></nz-switch>
+            <p class="create-modal_switcher-title">Да</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div nz-row [nzGutter]="8" nzJustify="end">
+      <div nz-col [nzSpan]="8">
+        <button
+          nz-button
+          nzType="default"
+          (click)="handleCancel()"
+          nzDanger
+          style="border-radius: 4px; width: 100%">
+          Отменить
+        </button>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <button
+          nz-button
+          nzType="primary"
+          (click)="handleOk()"
+          style="border-radius: 4px; width: 100%">
+          Сохранить
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </nz-modal>

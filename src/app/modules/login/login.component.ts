@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { showMessage } from '../../core/helpers';
+import { isFieldInvalid, showMessage } from '../../core/helpers';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
   ngOnDestroy(): void {}
-
-  isFieldInvalid(field: string) {
-    const formField = this.form.get(field);
-    const valid =
-      (!formField.valid && formField.touched && !formField.pristine) ||
-      (!formField.valid && formField.dirty && !formField.pristine);
-    return valid ? 'error' : '';
+  isFieldWrapperInvalid(field: string) {
+    return isFieldInvalid(field, this.form);
   }
   submit() {
     if (!this.form.valid) {

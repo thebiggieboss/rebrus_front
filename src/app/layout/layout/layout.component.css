@@ -1,0 +1,66 @@
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #324054;
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+
+.right-layout {
+  margin-left: 288px;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+.inner-content {
+  padding: 24px;
+  /*background: #fff;*/
+  margin: 24px 16px 0;
+  overflow: initial;
+}
+
+nz-footer {
+  text-align: center;
+}
+.custom-menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.app-header {
+  background-color: #f0f2f5;
+  border-bottom: .4px solid #CCCCCC;
+}
+.app-header-time {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  text-align: end;
+  padding-right: 32px;
+}
+.ant-menu-item {
+  &::after {
+    content: none;
+  }
+}
+/*.ant-layout-sider {*/
+/*  background: #FFFFFF;*/
+/*}*/

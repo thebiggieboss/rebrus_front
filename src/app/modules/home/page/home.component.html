@@ -1,98 +1,77 @@
-<app-main-layout>
+<app-layout>
   <div class="home-component">
-    <div class="home-component_head">
-      <div class="home-component_head-text">
-        <h3 class="home-component_head-text-title">Список пациентов</h3>
-        <p class="home-component_head-text-des">Таблица с пациентами</p>
+    <div nz-row [nzGutter]="[30, 30]">
+      <div nz-col nzSpan="24">
+        <div class="home-component_plot">
+          <h3 class="home-component_title">
+            Доброе утро<span style="font-weight: 500">,</span> доктор
+            <span style="font-weight: 500">Улан</span>.
+          </h3>
+          <div
+            nz-row
+            nzJustify="space-between"
+            style="width: 100%; max-width: 960px">
+            <p nz-col nzSpan="12" class="home-component_stat-title">
+              СТАТИСТИКА НАЗНАЧЕНИЙ
+            </p>
+            <div nz-col nzSpan="12" style="text-align: end">
+              <nz-radio-group
+                [(ngModel)]="time"
+                style="margin-bottom: 8px"
+                nzButtonStyle="solid">
+                <label nz-radio-button [nzValue]="'month'">Месяц</label>
+                <label nz-radio-button [nzValue]="'week'">Неделя</label>
+                <label nz-radio-button [nzValue]="'30'">30 дней</label>
+              </nz-radio-group>
+            </div>
+          </div>
+          <div>
+            <canvas id="canvas">{{ chart }}</canvas>
+          </div>
+        </div>
       </div>
-      <div class="home-component_head-actions">
-        <div class="home-component_head-action">
-          <span
-            nz-icon
-            nzType="delete"
-            nzTheme="outline"
-            style="font-size: 16px"></span>
-          <p class="home-component_head-action-text">Удалить</p>
+      <div nz-col nzSpan="8">
+        <div class="home-component_block1">
+          <div class="home-component_count">
+            <p class="home-component_count-title">
+              ОБЩЕЕ КОЛИЧЕСТВО ПАЦИЕНТОВ В ЭТОМ МЕСЯЦЕ
+            </p>
+            <h3 class="home-component_count-amount">10</h3>
+          </div>
+          <div class="home-component_count">
+            <p class="home-component_count-title">
+              ОБЩЕЕ КОЛИЧЕСТВО ПАЦИЕНТОВ ЗА ВСЕ ВРЕМЯ
+            </p>
+            <h3 class="home-component_count-amount">104</h3>
+          </div>
         </div>
-        <div class="home-component_head-action">
-          <span
-            nz-icon
-            nzType="filter"
-            nzTheme="outline"
-            style="font-size: 16px"></span>
-          <p class="home-component_head-action-text">Фильтр</p>
+      </div>
+      <div nz-col nzSpan="8">
+        <div class="home-component_block2">
+          <p class="home-component_faq-title">Часто встречающееся уязвимости</p>
+          <ul class="home-component_faq-lists">
+            <li *ngFor="let item of faqLists" class="home-component_faq-list">
+              {{ item }}
+            </li>
+          </ul>
         </div>
-        <div class="home-component_head-btns">
-          <button
-            nz-button
-            nzType="default"
-            nzSize="default"
-            style="border-radius: 8px">
-            <span
-              nz-icon
-              nzType="cloud-download"
-              nzTheme="outline"
-              style="font-size: 16px"></span>
-            Экспорт
-          </button>
-          <button
-            nz-button
-            nzType="primary"
-            nzSize="default"
-            style="border-radius: 8px"
-            (click)="openModal()">
-            <span
-              nz-icon
-              nzType="plus"
-              nzTheme="outline"
-              style="font-size: 16px"></span>
-            Добавить пациента
-          </button>
+      </div>
+      <div nz-col nzSpan="8">
+        <div class="home-component_block3">
+          <div class="home-component_percent">
+            <p class="home-component_percent-title">
+              Процентов явки на лечение
+            </p>
+            <h3 class="home-component_percent-amount">73%</h3>
+          </div>
+          <div class="home-component_percent">
+            <p class="home-component_percent-title">
+              Процентов показателя всех пациентов
+            </p>
+            <h3 class="home-component_percent-amount">86%</h3>
+          </div>
         </div>
       </div>
     </div>
-    <nz-table #rowSelectionTable [nzData]="listOfData">
-      <thead>
-        <tr>
-          <th (click)="selectAllBlock()">
-            <input
-              class="custom-checkbox"
-              [(ngModel)]="mainCheckBox"
-              type="checkbox"
-              (change)="selectAll()" />
-          </th>
-          <th
-            *ngFor="let column of listOfColumn"
-            [(nzSortOrder)]="column.sortOrder"
-            [nzSortFn]="column.sortFn"
-            [nzFilters]="column.listOfFilter"
-            [nzFilterFn]="column.filterFn">
-            {{ column.title }}
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of rowSelectionTable.data">
-          <td (click)="singleSelectBlock(data)">
-            <input
-              class="custom-checkbox"
-              [(ngModel)]="data.isSelected"
-              type="checkbox"
-              (change)="singleSelect()" />
-          </td>
-          <td>{{ data.surname }}</td>
-          <td>{{ data.name }}</td>
-          <td>{{ data.iin }}</td>
-          <td>{{ data.gender }}</td>
-          <td>{{ data.creationDate }}</td>
-          <td>
-            <img src="./assets/icons/actions.svg" alt="" />
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
   </div>
-  <app-create-patient-modal
-    [isVisible]="isCreateModal"></app-create-patient-modal>
-</app-main-layout>
+</app-layout>
