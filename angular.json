@@ -124,6 +124,7 @@
   },
   "defaultProject": "rebrus_front",
   "cli": {
+    "analytics": false,
     "defaultCollection": "@angular-eslint/schematics"
   }
 }
