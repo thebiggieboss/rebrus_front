@@ -68,6 +68,9 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     NzTableModule,
     CreatePatientModalComponent,
     LayoutComponent,
+    NzGridModule,
+    NzRadioModule,
+    NzAvatarModule,
   ],
 })
 export class SharedModule {}

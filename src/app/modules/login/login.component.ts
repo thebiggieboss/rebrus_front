@@ -1,7 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { isFieldInvalid, showMessage } from '../../core/helpers';
+import {
+  isFieldInvalid,
+  showMessage,
+  warnEmptyField,
+} from '../../core/helpers';
+import { LoginService } from '../../core/services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +17,18 @@ import { isFieldInvalid, showMessage } from '../../core/helpers';
 export class LoginComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public passwordVisible = false;
+  public s: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private loginService: LoginService
   ) {
     this.form = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
         '',
-        Validators.compose([Validators.required, Validators.minLength(6)]),
+        Validators.compose([Validators.required, Validators.minLength(3)]),
       ],
     });
   }
@@ -29,13 +37,30 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {}
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.s.forEach(s => s.unsubscribe());
+  }
   isFieldWrapperInvalid(field: string) {
     return isFieldInvalid(field, this.form);
   }
   submit() {
     if (!this.form.valid) {
-      // showMessage('error', this.message, {});
+      warnEmptyField(this.form);
+      return;
     }
+    let params = {
+      email: this.formControls['email'].value,
+      password: this.formControls['password'].value,
+    };
+    this.s.push(
+      this.loginService.login(params).subscribe({
+        next: value => {
+          console.log(value);
+        },
+        error: err => {
+          console.log(err);
+        },
+      })
+    );
   }
 }

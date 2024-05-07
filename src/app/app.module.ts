@@ -8,12 +8,20 @@ import { ru_RU } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GuestComponent } from './layout/guest/guest.component';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 registerLocaleData(ru);
+
+const INTERCEPTOR = (type: any) => ({
+  provide: HTTP_INTERCEPTORS,
+  useClass: type,
+  multi: true,
+});
 
 @NgModule({
   declarations: [AppComponent, GuestComponent, PageNotFoundComponent],
@@ -26,7 +34,11 @@ registerLocaleData(ru);
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: ru_RU }],
+  providers: [
+    { provide: NZ_I18N, useValue: ru_RU },
+    INTERCEPTOR(ErrorInterceptor),
+    INTERCEPTOR(TokenInterceptor),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
