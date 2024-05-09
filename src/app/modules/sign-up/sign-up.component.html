@@ -1,0 +1,190 @@
+<div class="sign-up" [formGroup]="form">
+  <img src="./assets/icons/Logo.svg" alt="" class="sign-up_logo" />
+  <ng-template [ngIf]="isFirstStep">
+    <div nz-row style="width: 100%; gap: 50px" nzJustify="center">
+      <div nz-col nzSpan="7">
+        <div nz-row style="gap: 24px">
+          <div nz-col nzSpan="24">
+            <label for="email" class="sign-up_label"> Электронная почта </label>
+            <input
+              id="email"
+              formControlName="email"
+              nz-input
+              type="email"
+              class="sign-up_input"
+              [nzStatus]="isFieldWrapperInvalid('email')" />
+          </div>
+          <div nz-col nzSpan="24">
+            <label for="password" class="sign-up_label"> Пароль </label>
+            <nz-input-group
+              [nzSuffix]="suffixTemplate"
+              [nzStatus]="isFieldWrapperInvalid('password')"
+              class="sign-up_input">
+              <input
+                id="password"
+                formControlName="password"
+                nz-input
+                [type]="passwordVisible ? 'text' : 'password'" />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <span
+                nz-icon
+                [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
+                (click)="passwordVisible = !passwordVisible"></span>
+            </ng-template>
+          </div>
+          <div nz-col nzSpan="24">
+            <label for="confirmPass" class="sign-up_label">
+              Подтвердите пароль
+            </label>
+            <nz-input-group
+              [nzSuffix]="suffixConfirmTemplate"
+              [nzStatus]="isFieldWrapperInvalid('confirmPass')"
+              class="sign-up_input">
+              <input
+                id="confirmPass"
+                formControlName="confirmPass"
+                nz-input
+                [type]="confirmPassVisible ? 'text' : 'password'" />
+            </nz-input-group>
+            <ng-template #suffixConfirmTemplate>
+              <span
+                nz-icon
+                [nzType]="confirmPassVisible ? 'eye' : 'eye-invisible'"
+                (click)="confirmPassVisible = !confirmPassVisible"></span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div nz-col nzSpan="7">
+        <div nz-row style="gap: 24px">
+          <div nz-col nzSpan="24">
+            <label for="surname" class="sign-up_label"> Фамилия </label>
+            <input
+              id="surname"
+              formControlName="surname"
+              nz-input
+              type="text"
+              class="sign-up_input"
+              [nzStatus]="isFieldWrapperInvalid('surname')" />
+          </div>
+          <div nz-col nzSpan="24">
+            <label for="name" class="sign-up_label"> Имя </label>
+            <input
+              id="name"
+              formControlName="name"
+              nz-input
+              type="text"
+              class="sign-up_input"
+              [nzStatus]="isFieldWrapperInvalid('name')" />
+          </div>
+          <div nz-col nzSpan="24">
+            <label for="patronymic" class="sign-up_label"> Отчество </label>
+            <input
+              id="patronymic"
+              formControlName="patronymic"
+              nz-input
+              type="text"
+              class="sign-up_input"
+              [nzStatus]="isFieldWrapperInvalid('patronymic')" />
+          </div>
+        </div>
+      </div>
+      <div nz-col nzSpan="7">
+        <div nz-row style="gap: 24px">
+          <div nz-col nzSpan="24">
+            <label for="phone" class="sign-up_label"> Телефон </label>
+            <input
+              id="phone"
+              formControlName="phone"
+              nz-input
+              type="text"
+              class="sign-up_input"
+              [mask]="' (000) 000 00 00'"
+              [prefix]="'+7'"
+              [nzStatus]="isFieldWrapperInvalid('phone')" />
+          </div>
+          <div nz-col nzSpan="24">
+            <label for="region" class="sign-up_label"> Область </label>
+            <div>
+              <nz-select
+                id="region"
+                formControlName="region"
+                class="sign-up_select"
+                nzAllowClear
+                nzPlaceHolder="Выбрать"
+                [nzStatus]="isFieldWrapperInvalid('region')">
+                <nz-option nzValue="almaty" nzLabel="Алматы"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div nz-col nzSpan="24">
+            <label for="gender" class="sign-up_label"> Пол </label>
+            <div>
+              <nz-select
+                id="gender"
+                formControlName="gender"
+                class="sign-up_select"
+                nzAllowClear
+                nzPlaceHolder="Выбрать"
+                [nzStatus]="isFieldWrapperInvalid('gender')">
+                <nz-option nzValue="male" nzLabel="Мужчина"></nz-option>
+                <nz-option nzValue="female" nzLabel="Женщина"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="isSecondStep">
+    <nz-radio-group [formControlName]="'role'" style="width: 100%">
+      <div nz-row style="width: 100%; gap: 34px">
+        <div
+          nz-col
+          nzSpan="24"
+          nz-radio-button
+          nzValue="SPECIALIST"
+          class="sign-up_radio">
+          <p class="sign-up_radio-text">Я специалист</p>
+          <p class="sign-up_radio-text">
+            Ваша ответственность - регистрация пациентов, сбор точных данных и
+            проведение медицинских тестов.
+          </p>
+        </div>
+        <div
+          nz-col
+          nzSpan="24"
+          nz-radio-button
+          nzValue="DOCTOR"
+          class="sign-up_radio">
+          <p class="sign-up_radio-text">Я доктор</p>
+          <p class="sign-up_radio-text">
+            Ваша роль - заботиться о здоровье пациентов, анализировать истории и
+            назначать лечение.
+          </p>
+        </div>
+      </div>
+    </nz-radio-group>
+  </ng-template>
+  <div nz-row style="width: 100%; gap: 34px" nzJustify="center">
+    <div nz-col nzSpan="10">
+      <button
+        nz-button
+        nzType="default"
+        class="sign-up_btn1"
+        (click)="onBack()">
+        Вернуться
+      </button>
+    </div>
+    <div nz-col nzSpan="10">
+      <button
+        nz-button
+        nzType="primary"
+        class="sign-up_btn2"
+        (click)="onNext()">
+        Продолжить
+      </button>
+    </div>
+  </div>
+</div>

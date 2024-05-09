@@ -4,24 +4,29 @@
       <div nz-col nzSpan="24">
         <div class="home-component_plot">
           <h3 class="home-component_title">
-            Доброе утро<span style="font-weight: 500">,</span> доктор
+            {{ 'home.title' | translate
+            }}<span style="font-weight: 500">,</span>
+            {{ 'home.doctor' | translate }}
             <span style="font-weight: 500">Улан</span>.
           </h3>
-          <div
-            nz-row
-            nzJustify="space-between"
-            style="width: 100%; max-width: 960px">
+          <div nz-row nzJustify="space-between">
             <p nz-col nzSpan="12" class="home-component_stat-title">
-              СТАТИСТИКА НАЗНАЧЕНИЙ
+              {{ 'home.static' | translate }}
             </p>
             <div nz-col nzSpan="12" style="text-align: end">
               <nz-radio-group
                 [(ngModel)]="time"
                 style="margin-bottom: 8px"
                 nzButtonStyle="solid">
-                <label nz-radio-button [nzValue]="'month'">Месяц</label>
-                <label nz-radio-button [nzValue]="'week'">Неделя</label>
-                <label nz-radio-button [nzValue]="'30'">30 дней</label>
+                <label nz-radio-button [nzValue]="'month'">{{
+                  'home.month' | translate
+                }}</label>
+                <label nz-radio-button [nzValue]="'week'">{{
+                  'home.week' | translate
+                }}</label>
+                <label nz-radio-button [nzValue]="'30'">{{
+                  'home.day' | translate
+                }}</label>
               </nz-radio-group>
             </div>
           </div>
@@ -34,13 +39,13 @@
         <div class="home-component_block1">
           <div class="home-component_count">
             <p class="home-component_count-title">
-              ОБЩЕЕ КОЛИЧЕСТВО ПАЦИЕНТОВ В ЭТОМ МЕСЯЦЕ
+              {{ 'home.amountPatient' | translate }}
             </p>
             <h3 class="home-component_count-amount">10</h3>
           </div>
           <div class="home-component_count">
             <p class="home-component_count-title">
-              ОБЩЕЕ КОЛИЧЕСТВО ПАЦИЕНТОВ ЗА ВСЕ ВРЕМЯ
+              {{ 'home.countPatient' | translate }}
             </p>
             <h3 class="home-component_count-amount">104</h3>
           </div>
@@ -48,7 +53,7 @@
       </div>
       <div nz-col nzSpan="8">
         <div class="home-component_block2">
-          <p class="home-component_faq-title">Часто встречающееся уязвимости</p>
+          <p class="home-component_faq-title">{{ 'home.faq' | translate }}</p>
           <ul class="home-component_faq-lists">
             <li *ngFor="let item of faqLists" class="home-component_faq-list">
               {{ item }}

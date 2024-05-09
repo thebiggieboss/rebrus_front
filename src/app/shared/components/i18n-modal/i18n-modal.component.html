@@ -1,0 +1,48 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Выбор языка"
+  [nzFooter]="null"
+  (nzOnCancel)="handleCancel()"
+  [nzWidth]="'730px'"
+  [nzClassName]="'i18n-modal'">
+  <ng-container *nzModalContent>
+    <nz-radio-group
+      [(ngModel)]="locale"
+      class="i18n-modal_radio"
+      nzButtonStyle="solid">
+      <label nz-radio-button nzValue="ru" (click)="setLocale('ru')">
+        <div class="i18n-modal_tab">
+          <img src="./assets/icons/ru-icon.png" alt="" />
+          <p>Русский</p>
+          <span
+            *ngIf="locale === 'ru'"
+            nz-icon
+            nzType="check"
+            nzTheme="outline"></span>
+        </div>
+      </label>
+      <label nz-radio-button nzValue="en" (click)="setLocale('en')">
+        <div class="i18n-modal_tab">
+          <img src="./assets/icons/en-icon.png" alt="" />
+          <p>English</p>
+          <span
+            *ngIf="locale === 'en'"
+            nz-icon
+            nzType="check"
+            nzTheme="outline"></span>
+        </div>
+      </label>
+      <label nz-radio-button nzValue="kk" (click)="setLocale('kk')">
+        <div class="i18n-modal_tab">
+          <img src="./assets/icons/kk-icon.png" alt="" />
+          <p>Қазақша</p>
+          <span
+            *ngIf="locale === 'kk'"
+            nz-icon
+            nzType="check"
+            nzTheme="outline"></span>
+        </div>
+      </label>
+    </nz-radio-group>
+  </ng-container>
+</nz-modal>

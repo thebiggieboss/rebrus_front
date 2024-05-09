@@ -35,11 +35,15 @@ export class CreatePatientModalComponent implements OnInit, OnDestroy {
     });
   }
   isFieldWrapperInvalid = (field: string) => isFieldInvalid(field, this.form);
+
   ngOnInit(): void {}
+
   ngOnDestroy(): void {}
+
   handleCancel() {
     this.clicked.emit('cancel');
   }
+
   handleOk() {
     if (!this.form.valid) {
       warnEmptyField(this.form);

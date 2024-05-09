@@ -1,0 +1,28 @@
+.profile {
+  &-main {
+    background-color: #FFFFFF;
+    padding: 34px 48px;
+    &_title {
+      color: #000000;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    &_price {
+      color: #9A9A9A;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    &_avatar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 140px;
+      text-align: center;
+      align-items: center;
+    }
+  }
+  &_field {
+
+  }
+}
