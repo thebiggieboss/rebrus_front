@@ -1,8 +1,8 @@
-<div class="not-found">
-  <img
-    title="Click me, and go Home!"
-    src="./assets/images/404.jpg"
-    alt=""
-    class="not-found_img"
-    (click)="goHome()" />
-</div>
+<nz-result
+  nzStatus="404"
+  nzTitle="404"
+  nzSubTitle="Sorry, the page you visited does not exist.">
+  <div nz-result-extra>
+    <button nz-button nzType="primary" routerLink="/home">Back Home</button>
+  </div>
+</nz-result>

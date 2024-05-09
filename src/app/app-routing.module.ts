@@ -41,8 +41,21 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'sign-up',
+    loadChildren: () =>
+      import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule),
+  },
+  {
+    path: 'otp',
+    loadChildren: () =>
+      import('./modules/otp/otp.module').then(m => m.OtpModule),
+  },
+  {
     path: '**',
-    component: PageNotFoundComponent,
+    loadChildren: () =>
+      import('./layout/page-not-found/page-not-found.module').then(
+        m => m.PageNotFoundModule
+      ),
   },
 ];
 

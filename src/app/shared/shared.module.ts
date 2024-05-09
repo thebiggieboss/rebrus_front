@@ -24,9 +24,21 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { LayoutComponent } from '../layout/layout/layout.component';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { WelcomeModalComponent } from './components/welcome-modal/welcome-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { I18nModalComponent } from './components/i18n-modal/i18n-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [PushComponent, CreatePatientModalComponent, LayoutComponent],
+  declarations: [
+    PushComponent,
+    CreatePatientModalComponent,
+    LayoutComponent,
+    WelcomeModalComponent,
+    I18nModalComponent,
+  ],
   imports: [
     CommonModule,
     NzLayoutModule,
@@ -51,6 +63,9 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     NzSliderModule,
     NzImageModule,
     NzAvatarModule,
+    NgxMaskModule.forRoot(),
+    NzResultModule,
+    TranslateModule,
   ],
   providers: [],
   exports: [
@@ -71,6 +86,10 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     NzGridModule,
     NzRadioModule,
     NzAvatarModule,
+    WelcomeModalComponent,
+    NgxMaskModule,
+    NzResultModule,
+    TranslateModule,
   ],
 })
 export class SharedModule {}

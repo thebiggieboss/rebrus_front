@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import {
-  isFieldInvalid,
-  showMessage,
-  warnEmptyField,
-} from '../../core/helpers';
+import { isFieldInvalid, warnEmptyField } from '../../core/helpers';
 import { LoginService } from '../../core/services/login.service';
 import { Subscription } from 'rxjs';
+import { NotificationService } from '../../core/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +15,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public passwordVisible = false;
   public s: Subscription[] = [];
+  public isWelcome: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private message: NzMessageService,
-    private loginService: LoginService
+    private notification: NotificationService,
+    private loginService: LoginService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -36,7 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showWelcomeModal();
+  }
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
   }
@@ -55,12 +56,29 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.s.push(
       this.loginService.login(params).subscribe({
         next: value => {
-          console.log(value);
+          this.loginService.setCookie('access_token', value, '/');
+          this.loginService.setCookie('refresh_token', value, '/');
+          setTimeout(() => {
+            this.router.navigate(['/home'], {
+              replaceUrl: true,
+            });
+          });
         },
         error: err => {
-          console.log(err);
+          this.notification.show(
+            'error',
+            `Ошибка: ${err?.status}`,
+            'Неизвестная ошибка'
+          );
         },
       })
     );
+  }
+
+  showWelcomeModal() {
+    const getLocalStorage = localStorage.getItem('welcome-modal');
+    if (!getLocalStorage) {
+      this.isWelcome = true;
+    }
   }
 }

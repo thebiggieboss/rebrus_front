@@ -1,0 +1,22 @@
+.i18n-modal {
+  &_radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    height: 100%;
+  }
+  &_tab {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    height: 100%;
+  }
+  ::ng-deep {
+    .ant-radio-button-wrapper-checked {
+      background: #0080FF !important;
+    }
+  }
+}

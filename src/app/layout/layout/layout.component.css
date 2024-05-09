@@ -61,6 +61,16 @@ nz-footer {
     content: none;
   }
 }
+.layout-head-item {
+  display: flex;
+  gap: 24px;
+  justify-content: end;
+  align-items: center;
+}
+.layout-head-line {
+  border: 1px solid #000000;
+  height: 15px;
+}
 /*.ant-layout-sider {*/
 /*  background: #FFFFFF;*/
 /*}*/

@@ -12,30 +12,32 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
   baseUrl = environment.baseUrl;
   authorized = new BehaviorSubject<boolean>(false);
+
   constructor(
     private cookieService: CookieService,
     private router: Router,
     private http: HttpClient
   ) {}
+
   login(params: ILogin) {
     return this.http.post(`${this.baseUrl}/auth/login`, params);
   }
+
   logout() {
     this.setAuthorizedStatus(false);
     this.cookieService.deleteAll('/');
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
+
   setAuthorizedStatus(val: boolean) {
     this.authorized.next(val);
   }
-  setCookie(name: string, value: any, expires: number, path: string) {
-    this.cookieService.set(
-      name,
-      value[name],
-      Math.floor(value.expires_in / expires),
-      path
-    );
+
+  setCookie(name: string, value: any, path: string) {
+    const expirationTime = new Date();
+    expirationTime.setMinutes(expirationTime.getMinutes() + 30);
+    this.cookieService.set(name, value[name], expirationTime, path);
     this.setAuthorizedStatus(true);
   }
 }

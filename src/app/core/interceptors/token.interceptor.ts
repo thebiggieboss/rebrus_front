@@ -26,7 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (localStorage.getItem('token')) {
           sessionStorage.setItem('token', localStorage.getItem('token'));
         } else {
-          this.loginService.logout();
+          // this.loginService.logout();
         }
       } else {
         if (!localStorage.getItem('token')) {

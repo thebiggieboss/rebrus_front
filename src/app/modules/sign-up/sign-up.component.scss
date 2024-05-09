@@ -1,0 +1,63 @@
+.sign-up {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 60px;
+  &_logo {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+  &_btn1 {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  &_btn2 {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  &_label {
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+  }
+  &_input {
+    margin-top: 12px;
+    border-radius: 2px;
+    border: 1px solid #D9D9D9;
+    color: #667085;
+    font-size: 14px;
+    height: 44px;
+    font-weight: 400;
+  }
+  &_select {
+    margin-top: 12px;
+    width: 100%;
+    outline: none;
+    height: 44px;
+    ::ng-deep {
+      .ant-select-selector {
+        height: 100%;
+        align-items: center;
+      }
+    }
+  }
+  &_radio {
+    height: 100%;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    &-text {
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+}

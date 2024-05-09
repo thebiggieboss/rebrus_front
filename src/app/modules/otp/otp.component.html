@@ -1,0 +1,35 @@
+<div class="otp-component">
+  <div class="otp-component_content">
+    <img src="./assets/icons/Logo.svg" alt="" class="otp-component_logo" />
+    <div class="otp-component_texts">
+      <h3 class="otp-component_title">
+        Проверка OTP <br />
+        Пожалуйста, введите
+      </h3>
+      <p class="otp-component_des">
+        Код был отправлен в почту {{ email }} <br />
+        Срок действия этого кода истекает в
+        <span class="otp-component_timer">{{ timer }}</span>
+      </p>
+    </div>
+    <div class="otp-component_otp">
+      <ng-otp-input
+        (onInputChange)="onOtpChange($event)"
+        [config]="{ length: 4 }"></ng-otp-input>
+      <div class="otp-component_retry">
+        <p class="otp-component_retry-text">Отправить заново?</p>
+        <div class="otp-component_send">
+          <span nz-icon nzType="undo" nzTheme="outline"></span>
+          <p class="otp-component_send-text">Отправить</p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="otp-component_btn"
+      nz-button
+      nzType="primary"
+      (click)="submit()">
+      Подтвердить
+    </button>
+  </div>
+</div>
