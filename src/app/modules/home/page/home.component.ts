@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { filter, Subscription, tap } from 'rxjs';
+import { LoginService } from '../../../core/services/login.service';
+import { IUserInfo } from '../../../core/interfaces/login.interfaces';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +19,24 @@ export class HomeComponent implements OnInit, OnDestroy {
     'Обозначение',
     'Визуально-пространственные',
   ];
-  constructor() {}
+  public s: Subscription[] = [];
+  public userInfo: IUserInfo = null;
+
+  constructor(private loginService: LoginService) {}
+
   ngOnInit(): void {
     this.createPlot();
+    this.s.push(
+      this.loginService.userInfo$
+        .pipe(
+          filter(Boolean),
+          tap(res => (this.userInfo = res))
+        )
+        .subscribe()
+    );
   }
   ngOnDestroy(): void {}
+
   createPlot() {
     this.chart = new Chart('canvas', {
       type: 'line',

@@ -57,19 +57,30 @@
               <a>Выйти</a>
             </span>
           </li>
-          <li nz-menu-item nzMatchRouter nz-row routerLink="/profile">
-            <nz-avatar
-              nz-col
-              nzSpan="12"
-              nzIcon="user"
-              nzSrc="./assets/images/ava.png"
-              [nzSize]="40"></nz-avatar>
-            <div nz-col nzSpan="12" style="padding-left: 12px">
-              <div style="display: flex; flex-direction: column; gap: 4px">
-                <p style="line-height: 100%">Улан Кожабеков</p>
-                <p
-                  style="color: #71839b; line-height: 100%"
-                  [innerHTML]="'ulankdt@gmail.com'"></p>
+          <li
+            nz-menu-item
+            nzMatchRouter
+            routerLink="/profile"
+            style="height: max-content">
+            <div style="display: flex; align-items: center; gap: 4px">
+              <nz-avatar
+                nzIcon="user"
+                nzSrc="./assets/images/ava.png"
+                [nzSize]="40"></nz-avatar>
+              <div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    white-space: break-spaces;
+                    max-width: 200px;
+                  ">
+                  <p style="line-height: 100%">{{ who }}</p>
+                  <p
+                    style="color: #71839b; line-height: 100%"
+                    [innerHTML]="'ulankdt@gmail.com'"></p>
+                </div>
               </div>
             </div>
           </li>

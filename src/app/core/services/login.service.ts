@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { ILogin } from '../interfaces/login.interfaces';
+import { ILogin, IUserInfo } from '../interfaces/login.interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,6 +14,9 @@ export class LoginService {
   authorized = new BehaviorSubject<boolean>(false);
 
   public date$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public userInfo$: BehaviorSubject<IUserInfo> = new BehaviorSubject<IUserInfo>(
+    null
+  );
 
   constructor(
     private cookieService: CookieService,
@@ -45,5 +48,9 @@ export class LoginService {
 
   authLogout() {
     return this.http.options(`${this.baseUrl}/auth/logout`);
+  }
+
+  getUserInfo(): Observable<IUserInfo> {
+    return this.http.get<IUserInfo>(`${this.baseUrl}/auth/user-info`);
   }
 }

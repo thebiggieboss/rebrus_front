@@ -1,6 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, Subscription, tap } from 'rxjs';
 import { LoginService } from './core/services/login.service';
+import { NotificationService } from './core/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,10 @@ export class AppComponent implements OnInit, OnDestroy {
   onResize(event: Event) {
     this.isDesktop.next(window.innerWidth >= 1200);
   }
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private notification: NotificationService
+  ) {}
 
   get isDesktopVersion$() {
     return this.isDesktop.asObservable();
@@ -33,6 +37,18 @@ export class AppComponent implements OnInit, OnDestroy {
       const today = new Date();
       this.loginService.date$.next(this.formatDate(today));
     }, 1000);
+    this.s.push(
+      this.loginService.authorized
+        .pipe(
+          distinctUntilChanged(),
+          tap(res => {
+            if (res) {
+              this.getUserInfo();
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {
@@ -48,5 +64,22 @@ export class AppComponent implements OnInit, OnDestroy {
     const seconds = String(date.getSeconds()).padStart(2, '0');
 
     return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+  getUserInfo() {
+    this.s.push(
+      this.loginService.getUserInfo().subscribe({
+        next: value => {
+          this.loginService.userInfo$.next(value);
+        },
+        error: err => {
+          this.notification.show(
+            'error',
+            `Ошибка: ${err?.status}`,
+            'Неизвестная ошибка'
+          );
+        },
+      })
+    );
   }
 }

@@ -16,3 +16,12 @@ export interface IRegister {
     gender: string;
   };
 }
+
+export interface IUserInfo {
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  birthDate: string;
+  gender: string;
+  region: string;
+}

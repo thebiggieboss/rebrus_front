@@ -7,7 +7,8 @@
             {{ 'home.title' | translate
             }}<span style="font-weight: 500">,</span>
             {{ 'home.doctor' | translate }}
-            <span style="font-weight: 500">Улан</span>.
+            <span style="font-weight: 500">{{ userInfo?.firstName }}</span
+            >.
           </h3>
           <div nz-row nzJustify="space-between">
             <p nz-col nzSpan="12" class="home-component_stat-title">

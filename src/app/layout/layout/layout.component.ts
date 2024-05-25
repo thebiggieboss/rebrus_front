@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from '../../core/services/login.service';
-import { Subscription } from 'rxjs';
+import { filter, Subscription, tap } from 'rxjs';
+import { IUserInfo } from '../../core/interfaces/login.interfaces';
 
 @Component({
   selector: 'app-layout',
@@ -10,10 +11,24 @@ import { Subscription } from 'rxjs';
 export class LayoutComponent implements OnInit, OnDestroy {
   public s: Subscription[] = [];
   public isI18nModal: boolean = false;
+  public userInfo: IUserInfo = null;
 
   constructor(public loginService: LoginService) {}
 
-  ngOnInit(): void {}
+  get who() {
+    return `${this.userInfo?.lastName} ${this.userInfo?.firstName} ${this.userInfo?.middleName}`;
+  }
+
+  ngOnInit(): void {
+    this.s.push(
+      this.loginService.userInfo$
+        .pipe(
+          filter(Boolean),
+          tap(res => (this.userInfo = res))
+        )
+        .subscribe()
+    );
+  }
 
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
