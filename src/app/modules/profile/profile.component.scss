@@ -15,14 +15,150 @@
     &_avatar {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 24px;
       width: 100%;
-      max-width: 140px;
       text-align: center;
       align-items: center;
     }
+    &_btn {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        max-width: 140px;
+        border-color: #0080FF;
+        color: #0080FF;
+        font-weight: 600;
+      }
+    }
   }
-  &_field {
+  &-field {
+    &_label {
+      font-weight: 400;
+      font-size: 14px;
+      color: #000000;
+    }
+    &_input {
+      margin-top: 12px;
+      border-radius: 8px;
+      border: 1px solid #D0D5DD;
+      font-size: 14px;
+      height: 44px;
+      font-weight: 400;
+      color: #101828;
+    }
+    &_select {
+      margin-top: 12px;
+      width: 100%;
+      outline: none;
+      height: 44px;
+    }
+  }
+  &-actions {
+    &_passwords {
+      background-color: #FFFFFF;
+      padding: 48px 54px;
+      display: grid;
+      gap: 30px;
+      &-title {
+        justify-self: center;
+        font-size: 16px;
+        font-weight: 400;
+        color: #000000;
+      }
+      &_label {
+        font-weight: 400;
+        font-size: 14px;
+        color: #000000;
+      }
+      &_input {
+        margin-top: 4px;
+        border-radius: 8px;
+        border: 1px solid #D0D5DD;
+        font-size: 14px;
+        height: 44px;
+        font-weight: 400;
+        color: #667085;
+        box-shadow: 0 1px 2px 0 #1018280D;
+        background-color: #F9FAFB;
+      }
+    }
+  }
+  &-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: space-between;
+    height: 100%;
+    &_block1 {
+      padding: 26px 64px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      &-title {
+        font-size: 16px;
+        text-align: center;
+        font-weight: 400;
+        color: #000000;
+      }
+      &_btn {
+        align-self: flex-end;
+        max-width: 140px;
+        border-color: #0080FF;
+        color: #0080FF;
+        font-weight: 600;
+      }
+    }
+    &_block2 {
+      padding: 24px 54px;
+      background: #FFFFFF;
+      display: flex;
+      gap: 36px;
+      flex-direction: column;
+      &-title {
+        font-size: 16px;
+        text-align: center;
+        font-weight: 400;
+        color: #000000;
+      }
+      &_btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+    &_label {
+      font-weight: 400;
+      font-size: 14px;
+      color: #000000;
+    }
+    &_input {
+      margin-top: 4px;
+      border-radius: 8px;
+      border: 1px solid #D0D5DD;
+      font-size: 14px;
+      height: 44px;
+      font-weight: 400;
+      color: #667085;
+      box-shadow: 0 1px 2px 0 #1018280D;
+      background-color: #F9FAFB;
+    }
+  }
 
+  ::ng-deep {
+    .ant-select-selector {
+      height: 100%;
+      align-items: center;
+    }
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      border-radius: 8px;
+      border: 1px solid #D0D5DD;
+      height: 44px;
+      align-items: center;
+    }
+    .ant-switch-checked {
+      background: #FF6347;
+    }
   }
 }
+
