@@ -1,3 +1,67 @@
 <app-layout>
-  <img src="./assets/images/under-construction.jpg" alt="" />
+  <div class="schedule">
+    <div class="schedule_head">
+      <p class="schedule_head-title">Список пациентов</p>
+      <div class="schedule_head_actions">
+        <div>
+          <nz-input-group
+            nzSearch
+            [nzAddOnAfter]="suffixIconButton"
+            class="schedule_head_actions__search-input-group">
+            <input
+              type="text"
+              nz-input
+              placeholder="Поиск"
+              class="schedule_head_actions__search-input"
+              [value]="searchTerm"
+              (input)="onSearch($event)" />
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button nzSearch>
+              <span nz-icon nzType="search"></span>
+            </button>
+          </ng-template>
+        </div>
+        <div>
+          <nz-date-picker
+            [(ngModel)]="selectedDate"
+            (ngModelChange)="onDateChange($event)"
+            class="schedule_head_actions__date-picker"
+            [nzPlaceHolder]="'Выберите дату рождения'"></nz-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="schedule_table">
+      <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Дата посещения</th>
+            <th>Присутствует</th>
+            <th>Отсутствует</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nzTable.data">
+            <td>{{ data.lastName }}</td>
+            <td>{{ data.firstName }}</td>
+            <td>{{ data.visits }}</td>
+            <td>
+              <input
+                class="custom-checkbox"
+                [ngModel]="data.isAttending"
+                type="checkbox" />
+            </td>
+            <td>
+              <input
+                class="custom-checkbox"
+                [ngModel]="data.isAbsent"
+                type="checkbox" />
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
 </app-layout>

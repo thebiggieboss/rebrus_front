@@ -1,0 +1,74 @@
+.schedule {
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 24px 0;
+  &_head {
+    padding: 0 0 24px 24px;
+    &-title {
+      font-weight: 500;
+      font-size: 20px;
+      color: #000000;
+    }
+    &_actions {
+      padding: 16px 0;
+      &__date-picker {
+        margin-top: 12px;
+        width: 100%;
+        max-width: 360px;
+        border-radius: 8px;
+        //border: 1px solid #D0D5DD;
+        color: #667085;
+        font-size: 14px;
+        height: 44px;
+        font-weight: 400;
+      }
+      &__search-input {
+        border: none;
+        color: #667085;
+        font-size: 14px;
+        height: 44px;
+        font-weight: 400;
+        border-radius: 8px;
+      }
+      &__search-input-group {
+        width: 100%;
+        max-width: 360px;
+        border-radius: 8px;
+        border: 1px solid #D0D5DD;
+        ::ng-deep {
+          .ant-input-group-addon, .ant-btn {
+            border: none;
+            background-color: initial;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+  &_table {
+    height: 100%;
+  }
+  tabel {
+    border-radius: 8px;
+  }
+  thead {
+    tr {
+      th {
+        background: #FCFCFD;
+      }
+    }
+  }
+  ::ng-deep {
+    .ant-table-pagination.ant-pagination {
+      padding: 0 16px;
+    }
+    .ant-table-cell {
+      color: #667085 !important;
+    }
+  }
+  .custom-checkbox {
+    pointer-events: none;
+    width: 16px;
+    height: 16px;
+  }
+}
