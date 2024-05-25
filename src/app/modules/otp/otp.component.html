@@ -9,7 +9,7 @@
       <p class="otp-component_des">
         Код был отправлен в почту {{ email }} <br />
         Срок действия этого кода истекает в
-        <span class="otp-component_timer">{{ timer }}</span>
+        <span class="otp-component_timer">{{ remainingTime }}</span>
       </p>
     </div>
     <div class="otp-component_otp">
@@ -18,7 +18,12 @@
         [config]="{ length: 4 }"></ng-otp-input>
       <div class="otp-component_retry">
         <p class="otp-component_retry-text">Отправить заново?</p>
-        <div class="otp-component_send">
+        <div
+          class="otp-component_send"
+          (click)="resend()"
+          [ngClass]="{
+            'otp-component_send_disabled': !isDisabled
+          }">
           <span nz-icon nzType="undo" nzTheme="outline"></span>
           <p class="otp-component_send-text">Отправить</p>
         </div>
@@ -28,6 +33,7 @@
       class="otp-component_btn"
       nz-button
       nzType="primary"
+      [disabled]="isDisabled"
       (click)="submit()">
       Подтвердить
     </button>

@@ -34,7 +34,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   checkLogin(): boolean {
     if (!this.cookieService.get('access_token')) {
       this.router.navigate(['login']);
-      this.notification.show('warning', '', 'Ваша сессия истекла');
       return false;
     }
     return true;

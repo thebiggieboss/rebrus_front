@@ -10,8 +10,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class LoginService {
-  baseUrl = environment.baseUrl;
+  baseUrl = 'http://localhost:8080';
   authorized = new BehaviorSubject<boolean>(false);
+
+  public date$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(
     private cookieService: CookieService,
@@ -39,5 +41,9 @@ export class LoginService {
     expirationTime.setMinutes(expirationTime.getMinutes() + 30);
     this.cookieService.set(name, value[name], expirationTime, path);
     this.setAuthorizedStatus(true);
+  }
+
+  authLogout() {
+    return this.http.options(`${this.baseUrl}/auth/logout`);
   }
 }

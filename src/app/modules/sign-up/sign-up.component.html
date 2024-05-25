@@ -128,8 +128,8 @@
                 nzAllowClear
                 nzPlaceHolder="Выбрать"
                 [nzStatus]="isFieldWrapperInvalid('gender')">
-                <nz-option nzValue="male" nzLabel="Мужчина"></nz-option>
-                <nz-option nzValue="female" nzLabel="Женщина"></nz-option>
+                <nz-option nzValue="M" nzLabel="Мужчина"></nz-option>
+                <nz-option nzValue="F" nzLabel="Женщина"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -170,6 +170,7 @@
   <div nz-row style="width: 100%; gap: 34px" nzJustify="center">
     <div nz-col nzSpan="10">
       <button
+        [nzLoading]="isLoader"
         nz-button
         nzType="default"
         class="sign-up_btn1"
@@ -179,6 +180,7 @@
     </div>
     <div nz-col nzSpan="10">
       <button
+        [nzLoading]="isLoader"
         nz-button
         nzType="primary"
         class="sign-up_btn2"

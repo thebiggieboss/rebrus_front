@@ -6,9 +6,12 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { NotificationService } from '../../core/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,37 +24,65 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public isSecondStep: boolean = false;
   public passwordVisible = false;
   public confirmPassVisible = false;
+  public isLoader: boolean = false;
 
   public form: FormGroup;
 
   constructor(
     private signUpService: SignUpService,
     private fb: FormBuilder,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private router: Router
   ) {
-    this.form = this.fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(3)]),
-      ],
-      confirmPass: ['', Validators.compose([Validators.required])],
-      surname: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      patronymic: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      region: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      role: ['SPECIALIST', [Validators.required]],
-    });
+    this.form = this.fb.group(
+      {
+        email: [
+          '',
+          Validators.compose([Validators.required, Validators.email]),
+        ],
+        password: [
+          '',
+          Validators.compose([Validators.required, Validators.minLength(3)]),
+        ],
+        confirmPass: [
+          '',
+          Validators.compose([
+            Validators.required,
+            this.passwordMatchValidator(),
+          ]),
+        ],
+        surname: ['', [Validators.required]],
+        name: ['', [Validators.required]],
+        patronymic: ['', [Validators.required]],
+        phone: ['', [Validators.required]],
+        region: ['', [Validators.required]],
+        gender: ['', [Validators.required]],
+        role: ['SPECIALIST', [Validators.required]],
+      },
+      { validator: this.passwordMatchValidator }
+    );
   }
 
-  // passwordMatchValidator(control: AbstractControl) {
-  //   const password = this.form;
-  //   const confirmPass = control?.value;
-  //   console.log(password);
-  //   return { mismatch: true };
-  // }
+  passwordMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control || !control.parent) {
+        return null;
+      }
+
+      const password = control.parent.get('password');
+      const confirmPass = control;
+
+      if (!password || !confirmPass) {
+        return null;
+      }
+
+      if (confirmPass.value !== password.value) {
+        return { passwordMismatch: true };
+      }
+
+      return null;
+    };
+  }
 
   ngOnInit(): void {}
 
@@ -61,7 +92,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   isFieldWrapperInvalid = (field: string) => isFieldInvalid(field, this.form);
 
-  onBack() {}
+  onBack() {
+    if (this.isSecondStep) {
+      this.isFirstStep = true;
+      this.isSecondStep = false;
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 
   onNext() {
     if (this.isFirstStep) {
@@ -91,12 +129,19 @@ export class SignUpComponent implements OnInit, OnDestroy {
         gender: form.get('gender').value,
       },
     };
+    this.isLoader = true;
     this.s.push(
       this.signUpService.register(body).subscribe({
-        next: value => {
-          console.log(value);
+        next: res => {
+          this.router.navigate(['/otp']);
+          this.signUpService.signUpResponse$.next({
+            ...res,
+            email: body.email,
+          });
+          this.isLoader = false;
         },
         error: err => {
+          this.isLoader = false;
           this.notification.show(
             'error',
             `Ошибка: ${err?.status}`,

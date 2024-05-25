@@ -65,6 +65,7 @@
     }
   }
   &_send {
+    cursor: pointer;
     color: #0080FF;
     display: flex;
     gap: 4px;
@@ -73,6 +74,10 @@
       font-size: 14px;
       font-weight: 500;
       color: #0080FF;
+    }
+    &_disabled {
+      pointer-events: none;
+      opacity: .5;
     }
   }
   &_btn {

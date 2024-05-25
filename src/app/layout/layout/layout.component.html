@@ -88,9 +88,14 @@
               nzTheme="outline"
               (click)="onOpenModal()"></span>
             <div class="layout-head-line"></div>
-            <div>
-              <ng-template [ngIf]="!!date && !!date.length" [ngIfElse]="isLoad">
-                <p class="app-header-time">Текущее время: {{ date }}</p>
+            <div
+              *ngIf="{
+                date: loginService.date$ | async
+              } as data">
+              <ng-template
+                [ngIf]="!!data.date && !!data.date.length"
+                [ngIfElse]="isLoad">
+                <p class="app-header-time">Текущее время: {{ data.date }}</p>
               </ng-template>
               <ng-template #isLoad>
                 <nz-spin
