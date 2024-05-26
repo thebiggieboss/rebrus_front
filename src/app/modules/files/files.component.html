@@ -1,3 +1,102 @@
 <app-layout>
-  <img src="./assets/images/under-construction.jpg" alt="" />
+  <div class="files">
+    <div class="files_head">
+      <div class="files_head-text">
+        <p class="files_head-title">Все файлы</p>
+        <p class="files_head-desc">Хранилище документов</p>
+      </div>
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="default"
+        style="border-radius: 8px"
+        (click)="onOpenModal()">
+        <span
+          nz-icon
+          nzType="plus"
+          nzTheme="outline"
+          style="font-size: 16px"></span>
+        Загрузить файл
+      </button>
+    </div>
+    <div class="files_table">
+      <nz-table #nzTable [nzData]="tableData" nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th nzWidth="100px"></th>
+            <th>Наименование файла</th>
+            <th>Описание</th>
+            <th>Дата загрузки</th>
+            <th nzWidth="100px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nzTable.data">
+            <td></td>
+            <td class="table-file-name">{{ data.fileName }}</td>
+            <td>{{ data.description }}</td>
+            <td>{{ data.creationDate }}</td>
+            <td>
+              <button
+                style="border: none; box-shadow: none"
+                class="table-file-btn"
+                nz-button
+                nz-dropdown
+                nzTrigger="click"
+                [nzDropdownMenu]="menu1"
+                nzPlacement="bottomRight">
+                <span nz-icon nzType="ellipsis"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-dropdown-menu #menu1="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="actions('download')">Скачать</li>
+          <li nz-menu-item (click)="actions('delete')">Удалить</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
+  </div>
+  <nz-modal
+    [(nzVisible)]="isVisibleModal"
+    nzTitle="Загрузка файла"
+    (nzOnCancel)="handleCancel()">
+    <ng-container *nzModalContent>
+      <div>
+        <nz-upload
+          [nzMultiple]="false"
+          nzName="file"
+          [(nzFileList)]="fileList"
+          nzListType="picture"
+          [nzShowUploadList]="true"
+          [nzPreview]="handlePreview"
+          [nzBeforeUpload]="beforeUpload">
+          <button nz-button>
+            <span nz-icon nzType="upload"></span>
+            Upload
+          </button>
+        </nz-upload>
+      </div>
+      <div>
+        <input
+          type="text"
+          nz-input
+          placeholder="Описание файла"
+          class="files_input"
+          [(ngModel)]="fileName" />
+      </div>
+    </ng-container>
+
+    <ng-container *nzModalFooter>
+      <button
+        nz-button
+        nzType="primary"
+        (click)="handleOk()"
+        style="width: 100%; max-width: 140px; border-radius: 4px">
+        Загрузить
+      </button>
+    </ng-container>
+  </nz-modal>
 </app-layout>

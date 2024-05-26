@@ -1,0 +1,76 @@
+.files {
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 24px 0;
+  &_head {
+    padding: 0 24px 24px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-title {
+      font-weight: 500;
+      font-size: 20px;
+      color: #000000;
+    }
+    &-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    &-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: #667085;
+    }
+  }
+  &_input {
+    margin-top: 12px;
+    border-radius: 5px;
+    border: 1px solid #D0D5DD;
+    font-size: 14px;
+    height: 32px;
+    font-weight: 400;
+    color: #101828;
+    padding: 5px 12px 5px 12px;
+  }
+  &_table {
+    height: 100%;
+  }
+  tabel {
+    border-radius: 8px;
+  }
+  thead {
+    tr {
+      th {
+        background: #FCFCFD;
+      }
+    }
+  }
+  .table-file-name {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #101828 !important;
+  }
+}
+::ng-deep {
+  .ant-table-pagination.ant-pagination {
+    padding: 0 16px;
+  }
+  .ant-table-cell {
+    color: #667085 !important;
+  }
+  .ant-dropdown-menu {
+    border-radius: 12px;
+    .ant-dropdown-menu-item {
+      padding: 10px 16px;
+      min-width: 212px;
+      border-bottom: 1px solid #c3c3c3;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .ant-upload-list-picture {
+    border-color: black;
+  }
+}
