@@ -5,6 +5,7 @@ import { IUserInfo } from '../../core/interfaces/login.interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../core/services/notification.service';
 import { isFieldInvalid } from '../../core/helpers';
+import { ProfileService } from '../../core/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,10 +23,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public changePasswordForm: FormGroup;
   public changeEmailForm: FormGroup;
 
+  public isActionLoader: boolean = false;
+
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private profileService: ProfileService
   ) {
     this.userInfoEditForm = this.fb.group({
       role: ['Специалист', [Validators.required]],
@@ -76,5 +80,51 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onChangeEmail() {}
 
-  actionWithProfile(action: string) {}
+  actionWithProfile(action: string) {
+    if (action === 'deactivate') {
+      this.deactivateAccount();
+    } else if (action === 'delete') {
+      this.deleteAccount();
+    }
+  }
+
+  deactivateAccount() {
+    this.isActionLoader = true;
+    this.s.push(
+      this.profileService.deactivateAccount().subscribe({
+        next: value => {
+          this.isActionLoader = false;
+          this.loginService.logout();
+        },
+        error: err => {
+          this.isActionLoader = false;
+          this.notification.show(
+            'error',
+            `Ошибка: ${err?.status}`,
+            'Неизвестная ошибка'
+          );
+        },
+      })
+    );
+  }
+
+  deleteAccount() {
+    this.isActionLoader = true;
+    this.s.push(
+      this.profileService.deleteAccount().subscribe({
+        next: value => {
+          this.isActionLoader = false;
+          this.loginService.logout();
+        },
+        error: err => {
+          this.isActionLoader = false;
+          this.notification.show(
+            'error',
+            `Ошибка: ${err?.status}`,
+            'Неизвестная ошибка'
+          );
+        },
+      })
+    );
+  }
 }

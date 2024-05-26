@@ -88,6 +88,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
+    this.isFirstStep = true;
+    this.isSecondStep = false;
   }
 
   isFieldWrapperInvalid = (field: string) => isFieldInvalid(field, this.form);

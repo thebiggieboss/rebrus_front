@@ -59,14 +59,6 @@
       }
     }
   }
-  ::ng-deep {
-    .ant-table-pagination.ant-pagination {
-      padding: 0 16px;
-    }
-    .ant-table-cell {
-      color: #667085 !important;
-    }
-  }
   //input[type='checkbox'] {
   //  -moz-appearance: none;
   //  -webkit-appearance: none;
@@ -95,4 +87,27 @@
   //    top: -0.25em;
   //  }
   //}
+}
+
+::ng-deep {
+  .ant-table-pagination.ant-pagination {
+    padding: 0 16px;
+  }
+  .ant-table-cell {
+    color: #667085 !important;
+  }
+  .ant-dropdown-menu {
+    border-radius: 12px;
+    .ant-dropdown-menu-item {
+      padding: 10px 16px;
+      min-width: 212px;
+      border-bottom: 1px solid #c3c3c3;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .ant-upload-list-picture {
+    border-color: black;
+  }
 }

@@ -82,14 +82,30 @@
                 type="checkbox"
                 (change)="singleSelect()" />
             </td>
-            <td>{{ data.surname }}</td>
-            <td>{{ data.name }}</td>
+            <td>{{ data.lastName }}</td>
+            <td>{{ data.firstName }}</td>
             <td>{{ data.iin }}</td>
-            <td>{{ data.gender }}</td>
-            <td>{{ data.creationDate }}</td>
+            <td>{{ data.genderText }}</td>
+            <td>{{ data.createdDate }}</td>
             <td>
-              <img src="./assets/icons/actions.svg" alt="" />
+              <button
+                style="border: none; box-shadow: none"
+                class="table-file-btn"
+                nz-button
+                nz-dropdown
+                nzTrigger="click"
+                [nzDropdownMenu]="menu1"
+                nzPlacement="bottomRight">
+                <span nz-icon nzType="ellipsis"></span>
+              </button>
             </td>
+
+            <nz-dropdown-menu #menu1="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="actions('open', data)">Перейти</li>
+                <li nz-menu-item (click)="actions('delete', data)">Удалить</li>
+              </ul>
+            </nz-dropdown-menu>
           </tr>
         </tbody>
       </nz-table>

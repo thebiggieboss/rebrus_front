@@ -35,7 +35,9 @@ export class TokenInterceptor implements HttpInterceptor {
       }
       this.loginService.setAuthorizedStatus(true);
       let request = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${idToken}`),
+        headers: req.headers
+          .set('Authorization', `Bearer ${idToken}`)
+          .set('Content-Type', 'application/json'),
       });
       return next.handle(request).pipe(catchError(error => throwError(error)));
     } else {

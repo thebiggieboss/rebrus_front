@@ -57,10 +57,24 @@ export class HomeComponent implements OnInit, OnDestroy {
         ],
         datasets: [
           {
-            label: 'My First Dataset',
+            label: 'Месяц',
             data: [65, 59, 80, 81, 56, 55, 40, 40, 12, 70, 71, 90],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+          },
+          {
+            label: 'Неделя',
+            data: [4, 59, 80, 81, 56, 12, 40, 40, 6, 70, 71, 90],
+            fill: false,
+            borderColor: 'black',
+            tension: 0.1,
+          },
+          {
+            label: 'День',
+            data: [4, 59, 80, 81, 56, 12, 40, 40, 6, 70, 71, 90],
+            fill: false,
+            borderColor: 'red',
             tension: 0.1,
           },
         ],
